@@ -77,8 +77,8 @@
             </div>
           </div>
         </div>
-        <button class="slider-btn prev-btn" id="prev-slide-btn" onclick="window.moveSlide(-1)">&lt;</button>
-        <button class="slider-btn next-btn" id="next-slide-btn" onclick="window.moveSlide(1)">&gt;</button>
+        <button class="slider-btn prev-btn" id="prev-slide-btn" onclick="window.moveSlide(-1)"><i class="fa-solid fa-chevron-right"></i></button>
+        <button class="slider-btn next-btn" id="next-slide-btn" onclick="window.moveSlide(1)"><i class="fa-solid fa-chevron-left"></i></button>
         <div class="slider-dots" id="slider-dots-container">
           <div class="slider-dot active" onclick="window.goToSlide(0)"></div>
           <div class="slider-dot" onclick="window.goToSlide(1)"></div>
@@ -116,7 +116,7 @@
         <div class="analysis-grid">
           <div class="analysis-card">
             <div class="analysis-card-header">
-              <span class="icon">✨</span>
+              <span class="icon"><i class="fa-solid fa-gem" style="color: var(--color-gold-liquid); font-size: 1.2rem; margin-left: 8px;"></i></span>
               <h4 id="karakou-header">الكاراكو العاصمي التقليدي</h4>
             </div>
             <p id="karakou-body">
@@ -125,7 +125,7 @@
           </div>
           <div class="analysis-card">
             <div class="analysis-card-header">
-              <span class="icon">👑</span>
+              <span class="icon"><i class="fa-solid fa-crown" style="color: var(--color-gold-liquid); font-size: 1.2rem; margin-left: 8px;"></i></span>
               <h4 id="caftan-header">القفطان الجزائري الملكي</h4>
             </div>
             <p id="caftan-body">
@@ -218,9 +218,9 @@
 
           <!-- Trust Icons Row -->
           <div class="landing-trust-grid">
-            <div class="trust-pill"><span class="icon">🚚</span> <span class="t-badge-shipping-title">توصيل سريع ومجاني</span></div>
-            <div class="trust-pill"><span class="icon">💵</span> <span class="t-badge-cod-title">الدفع عند الاستلام</span></div>
-            <div class="trust-pill"><span class="icon">✨</span> <span class="t-badge-quality-title">جودة مضمونة 100%</span></div>
+            <div class="trust-pill"><i class="fa-solid fa-truck-fast" style="color: var(--color-gold-liquid); font-size: 1.1rem; margin-left: 6px;"></i> <span class="t-badge-shipping-title">توصيل سريع ومجاني</span></div>
+            <div class="trust-pill"><i class="fa-solid fa-hand-holding-dollar" style="color: var(--color-gold-liquid); font-size: 1.1rem; margin-left: 6px;"></i> <span class="t-badge-cod-title">الدفع عند الاستلام</span></div>
+            <div class="trust-pill"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--color-gold-liquid); font-size: 1.1rem; margin-left: 6px;"></i> <span class="t-badge-quality-title">جودة مضمونة 100%</span></div>
           </div>
 
           <!-- Quantity / Package Bundle Selector -->
@@ -498,7 +498,7 @@
   <div class="auth-overlay" id="success-overlay" style="display: none;">
     <div class="auth-box">
       <div class="success-screen">
-        <div class="success-icon">✨</div>
+        <div class="success-icon"><i class="fa-solid fa-circle-check" style="color: var(--color-gold-liquid); font-size: 2.5rem;"></i></div>
         <h2 class="luxury-title" style="color: var(--color-gold-liquid); margin-bottom: 12px;" id="success-title">تم استلام طلبكِ بنجاح!</h2>
         <p style="margin-bottom: 20px;" id="success-msg">شكراً لثقتكِ بـ ZAPHERA. سيقوم فريق خدمة عملاء زافيرا بالتواصل معكِ عبر الهاتف والواتساب لتأكيد المقاسات وتنسيق الشحن السريع.</p>
         <div style="background: rgba(74, 21, 43, 0.06); border-radius: 8px; padding: 12px; font-size: 0.9rem; margin-bottom: 24px; border: var(--border-glass);" id="success-order-box">
@@ -512,7 +512,7 @@
   </div>
 
   <script type="module">
-    import { setupDeferredPixels, trackAddToCart, trackInitiateCheckout, trackPurchase } from '/pixels.js';
+    import { setupDeferredPixels, trackAddToCart, trackInitiateCheckout, trackPurchase } from './pixels.js';
 
     // 1. Initialize Deferred Script Loading
     setupDeferredPixels();
@@ -936,7 +936,7 @@
       productsListGrid.innerHTML = products.map(p => {
         const title = currentLang === 'ar' ? p.name_ar : p.name_en;
         const currencySymbol = currentLang === 'ar' ? 'د.ج' : 'DZD';
-        const mainImage = p.image_url.startsWith('http') || p.image_url.startsWith('/') 
+        const mainImage = p.image_url.startsWith('http') || p.image_url.startsWith('/') || p.image_url.startsWith('.')
           ? p.image_url 
           : `${API_URL}${p.image_url}`;
 
@@ -1121,7 +1121,7 @@
       }
 
       // Set Main Image
-      const mainImage = product.image_url.startsWith('http') || product.image_url.startsWith('/') 
+      const mainImage = product.image_url.startsWith('http') || product.image_url.startsWith('/') || product.image_url.startsWith('.')
         ? product.image_url 
         : `${API_URL}${product.image_url}`;
       
@@ -1182,7 +1182,7 @@
       const imagesArr = currentProduct.images && currentProduct.images.length > 0 ? currentProduct.images : [currentProduct.image_url];
       if (idx >= 0 && idx < imagesArr.length) {
         currentImageIndex = idx;
-        const nextImg = imagesArr[idx].startsWith('http') || imagesArr[idx].startsWith('/') 
+        const nextImg = imagesArr[idx].startsWith('http') || imagesArr[idx].startsWith('/') || imagesArr[idx].startsWith('.')
           ? imagesArr[idx] 
           : `${API_URL}${imagesArr[idx]}`;
         
